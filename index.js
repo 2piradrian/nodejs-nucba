@@ -6,7 +6,7 @@ const main = async () => {
 	const newExpense = await promptNewExpense();
 
 	console.log(" --- --- --- --- --- --- --- ---");
-	console.log("Nuevo gasto: ");
+	console.log(" Nuevo gasto: ");
 	console.table(newExpense);
 	console.log(" --- --- --- --- --- --- --- ---");
 
@@ -14,7 +14,7 @@ const main = async () => {
 	expenses.push(newExpense);
 	await save("expenses", expenses);
 
-	console.log("Gastos historicos: ");
+	console.log(" Gastos historicos: ");
 	console.table(expenses);
 };
 
