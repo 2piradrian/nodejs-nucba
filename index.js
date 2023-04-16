@@ -1,28 +1,21 @@
-import fs from "fs";
-import inquirer from "inquirer";
-import DatePrompt from "inquirer-date-prompt";
-
-inquirer.registerPrompt("date", DatePrompt);
+import { get, save } from "./fileMethods.js";
+import { promptNewExpense } from "./expensesPrompts.js";
 
 const main = async () => {
-	console.log("Hello World");
-	const answers = await inquirer.prompt([
-		{
-			type: "input",
-			name: "name",
-			message: "Cual es tu nombre?",
-		},
-		{
-			type: "input",
-			name: "category",
-			message: "Que tipo de gasto es?",
-		},
-		{
-			type: "date",
-			name: "time",
-			message: "Cual es la fecha del gasto?",
-		},
-	]);
+	console.log("Hola, bienvenido al CLI de gastos");
+	const newExpense = await promptNewExpense();
+
+	console.log(" --- --- --- --- --- --- --- ---");
+	console.log("Nuevo gasto: ");
+	console.table(newExpense);
+	console.log(" --- --- --- --- --- --- --- ---");
+
+	const expenses = await get("expenses");
+	expenses.push(newExpense);
+	await save("expenses", expenses);
+
+	console.log("Gastos historicos: ");
+	console.table(expenses);
 };
 
 main();
