@@ -1,1 +1,21 @@
-[{"name":"Carlo","category":"Servicios","time":"2019-01-01T00:00:00.000Z","amount":1000},{"name":"Juan","category":"Steam","time":"2019-01-01T00:00:00.000Z","amount":200},{"name":"Josesito","category":"Fotocopias","time":"2023-04-16T14:18:00.849Z","amount":9999},{"name":"Juan Pablo II","category":"Comida","time":"2023-04-16T14:20:59.630Z","amount":150}]
+[
+	{
+		"name": "Carlo",
+		"category": "Servicios",
+		"time": "2019-01-01T00:00:00.000Z",
+		"amount": 3000
+	},
+	{ "name": "Juansito", "category": "Steam", "time": "2019-01-01T00:00:00.000Z", "amount": 1200 },
+	{
+		"name": "Josesito",
+		"category": "Fotocopias",
+		"time": "2023-04-16T14:18:00.849Z",
+		"amount": 9999
+	},
+	{
+		"name": "Juan Pablo II",
+		"category": "Comida",
+		"time": "2023-04-16T14:20:59.630Z",
+		"amount": 150
+	}
+]
