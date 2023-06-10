@@ -7,8 +7,8 @@ export const ExpenseController = {
 		res.json(expense);
 	},
 	async createExpense(req: Request, res: Response) {
-		const { amount, name, date, userId } = req.body;
-		const newExpense = await ExpenseService.createExpense(amount, name, date, userId);
+		const { amount, name, userId } = req.body;
+		const newExpense = await ExpenseService.createExpense(amount, name, userId);
 		res.json(newExpense);
 	},
 };

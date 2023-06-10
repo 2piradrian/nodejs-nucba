@@ -12,7 +12,8 @@ export const ExpenseService = {
 		return expense;
 	},
 
-	async createExpense(amount: number, name: string, date: Date, userId: number) {
+	async createExpense(amount: number, name: string, userId: number) {
+		const date = new Date();
 		const newExpense = await prisma.expenses.create({
 			data: {
 				amount,
