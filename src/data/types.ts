@@ -5,4 +5,8 @@ export type Expense = {
 	date: Date;
 };
 
-export type User = {};
+export type User = {
+	id: number;
+	name: string;
+	email: string;
+};
