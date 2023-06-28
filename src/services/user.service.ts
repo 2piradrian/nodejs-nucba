@@ -8,15 +8,19 @@ export const UserService = {
 			where: {
 				id: id,
 			},
+			include: {
+				expenses: true,
+			},
 		});
 		return user;
 	},
 
-	async createUser(name: string, email: string) {
+	async createUser(name: string, email: string, password: string) {
 		const newUser = await prisma.users.create({
 			data: {
 				name: name,
 				email: email,
+				password: password,
 			},
 		});
 		return newUser;

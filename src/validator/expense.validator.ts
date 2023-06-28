@@ -9,7 +9,9 @@ export const ExpenseValidator = {
 				.json({ message: "El campo amount, userId y name son obligatorios" });
 		}
 		if (date !== undefined) {
-			res.status(400).json({ message: "El campo date debe ser generado en el backend" });
+			return res
+				.status(400)
+				.json({ message: "El campo date debe ser generado en el backend" });
 		}
 		next();
 	},

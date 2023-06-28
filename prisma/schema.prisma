@@ -10,6 +10,7 @@ datasource db {
 model Users {
   id        Int   @id @default(autoincrement())
   email     String   @unique
+  password  String
   name      String?
   expenses  Expenses[]
 }

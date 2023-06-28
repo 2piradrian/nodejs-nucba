@@ -8,8 +8,8 @@ export const UserController = {
 	},
 
 	async createUser(req: Request, res: Response) {
-		const { name, email } = req.body;
-		const newUser = await UserService.createUser(name, email);
+		const { name, email, password } = req.body;
+		const newUser = await UserService.createUser(name, email, password);
 		res.json(newUser);
 	},
 };
