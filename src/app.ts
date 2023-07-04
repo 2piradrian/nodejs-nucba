@@ -4,6 +4,7 @@ import { expenseRouter } from "./routes/expense.route";
 
 // Testing JWT
 import jwt from "jsonwebtoken";
+import bycript from "bcrypt";
 
 const app = express();
 
@@ -30,6 +31,36 @@ app.get("/api/readToken", (req, res) => {
 		return res.json(data);
 	} catch (error) {
 		return res.status(401).json({ message: "Invalid token" });
+	}
+});
+
+app.post("/api/register", (req, res) => {
+	const { email, password } = req.body;
+
+	if (!email || !password) {
+		return res.status(400).json({ message: "Email and password are required" });
+	}
+
+	const hash = bycript.hash(password, 10);
+
+	res.json({ hash });
+});
+
+app.post("/api/login", async (req, res) => {
+	const { email, password } = req.body;
+
+	if (!email || !password) {
+		return res.status(400).json({ message: "Email and password are required" });
+	}
+
+	const userPassFromDatabase = "hash-password";
+	const isValid = await bycript.compare(password, userPassFromDatabase);
+
+	if (isValid) {
+		const accessToken = jwt.sign({ password }, "my-password", { expiresIn: "1h" });
+		return res.json({ accessToken });
+	} else {
+		return res.status(401).json({ message: "Invalid credentials" });
 	}
 });
 
