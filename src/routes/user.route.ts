@@ -7,4 +7,6 @@ export const userRouter = Router();
 
 userRouter.get("/user/:id", AuthMiddleware.checkToken, UserController.getUserById);
 
-userRouter.post("/user", UserValidator.createUserValidation, UserController.createUser);
+userRouter.post("/user/register", UserValidator.createUserValidation, UserController.register);
+
+userRouter.post("/user/login", UserController.login);

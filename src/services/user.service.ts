@@ -19,6 +19,24 @@ export const UserService = {
 		return user;
 	},
 
+	async login(email: string, password: string): Promise<string> {
+		const user = await prisma.users.findUnique({ where: { email } });
+
+		if (!user) {
+			throw new Error("Invalid credentials");
+		}
+
+		const passwordMatch = await bcrypt.compare(password, user.password);
+
+		if (!passwordMatch) {
+			throw new Error("Invalid credentials");
+		}
+
+		const token = jwt.sign({ userId: user.id }, accessTokenSecret, { expiresIn: "1h" });
+
+		return token;
+	},
+
 	async register(
 		name: string,
 		email: string,
@@ -45,23 +63,5 @@ export const UserService = {
 		});
 
 		return newUser;
-	},
-
-	async login(email: string, password: string): Promise<string> {
-		const user = await prisma.users.findUnique({ where: { email } });
-
-		if (!user) {
-			throw new Error("Invalid credentials");
-		}
-
-		const passwordMatch = await bcrypt.compare(password, user.password);
-
-		if (!passwordMatch) {
-			throw new Error("Invalid credentials");
-		}
-
-		const token = jwt.sign(user.password, accessTokenSecret, { expiresIn: "1h" });
-
-		return token;
 	},
 };

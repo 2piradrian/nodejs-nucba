@@ -11,7 +11,7 @@ export const ExpenseValidator = {
 		if (date !== undefined) {
 			return res
 				.status(400)
-				.json({ message: "El campo date debe ser generado en el backend" });
+				.json({ message: "El campo date debe ser generado por el servidor" });
 		}
 		next();
 	},

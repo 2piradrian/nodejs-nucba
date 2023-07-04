@@ -5,6 +5,7 @@ import { expenseRouter } from "./routes/expense.route";
 const app = express();
 
 app.use(express.json());
+
 app.use("/api", userRouter);
 app.use("/api", expenseRouter);
 
