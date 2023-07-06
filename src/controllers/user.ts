@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserService } from "../services/user.service";
+import { UserService } from "../services/user";
 
 export const UserController = {
 	async getUserById(req: Request, res: Response) {
@@ -12,8 +12,8 @@ export const UserController = {
 			const { email, password } = req.body;
 			const token = await UserService.login(email, password);
 			res.json({ token });
-		} catch (e) {
-			res.status(500).json({ error: e });
+		} catch (error) {
+			res.status(500).json({ error: error });
 		}
 	},
 

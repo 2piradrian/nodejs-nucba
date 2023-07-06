@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ExpenseService } from "../services/expense.service";
+import { ExpenseService } from "../services/expense";
 
 export const ExpenseController = {
 	async getExpenseById(req: Request, res: Response) {

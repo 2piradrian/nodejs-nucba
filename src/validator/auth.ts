@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 const accessTokenSecret = process.env.access_token_secret ?? "";
 
-export const AuthMiddleware = {
+export const AuthValidator = {
 	checkToken: (req: Request, res: Response, next: NextFunction) => {
 		const header = req.headers.authorization;
 		if (!header) {
@@ -16,6 +16,8 @@ export const AuthMiddleware = {
 		try {
 			const data = jwt.verify(token, accessTokenSecret);
 			if (data) {
+				// ####
+				(req as any).user = (data as any).userId;
 				return next();
 			}
 			return res.status(401).json({ message: "Invalid token" });
