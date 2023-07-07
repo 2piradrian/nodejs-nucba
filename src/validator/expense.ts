@@ -7,18 +7,24 @@ export const ExpenseValidator = {
 		if (!amount || !userId || !name || !date || !deleted) {
 			return res.status(400).json({ message: "All fields are required" });
 		}
+
+		if (typeof amount !== "number") {
+			return res.status(400).json({ message: "Amount must be a number" });
+		}
+
+		// is the user a expense owner?
+
 		next();
 	},
 	getByExpenseId(req: RequestToken, res: Response, next: NextFunction) {
-		// expenseId from url
 		const { id } = req.params;
+
 		if (!id) {
 			return res.status(400).json({ message: "Id is required" });
 		}
 		next();
 	},
 	getByUserId(req: RequestToken, res: Response, next: NextFunction) {
-		// userId from token
 		const { userId } = req.params;
 
 		if (!userId) {
@@ -27,9 +33,6 @@ export const ExpenseValidator = {
 		next();
 	},
 	update(req: RequestToken, res: Response, next: NextFunction) {
-		// userId from token
-		const { userId } = req.params;
-		// amount and name from body
 		const { amount, name } = req.body;
 		if (!amount || !name) {
 			return res.status(400).json({ message: "All fields are required" });
