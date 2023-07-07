@@ -5,11 +5,15 @@ import { ExpenseController } from "../controllers/expense";
 
 export const expenseRouter = Router();
 
-expenseRouter.get("/expense/:id", AuthValidator.checkToken, ExpenseController.getExpenseById);
+expenseRouter.get("/expense/:id", AuthValidator.checkToken, ExpenseController.getByExpenseId);
 
 expenseRouter.post(
 	"/expense",
 	AuthValidator.checkToken,
-	ExpenseValidator.createExpenseValidation,
-	ExpenseController.createExpense
+	ExpenseValidator.create,
+	ExpenseController.create
 );
+
+expenseRouter.get("/expense", AuthValidator.checkToken, ExpenseController.getByUserId);
+
+expenseRouter.put("/expense");
