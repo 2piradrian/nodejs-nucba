@@ -24,4 +24,38 @@ export const ExpenseService = {
 		});
 		return newExpense;
 	},
+
+	async getExpensesByUserId(userId: number) {
+		const expenses = await prisma.expenses.findMany({
+			where: {
+				userId: userId,
+			},
+		});
+		return expenses;
+	},
+
+	async deleteExpenseById(id: number) {
+		const deletedExpense = await prisma.expenses.update({
+			where: {
+				id: id,
+			},
+			data: {
+				deleted: true,
+			},
+		});
+		return deletedExpense;
+	},
+
+	async updateExpenseById(id: number, amount: number, name: string) {
+		const updatedExpense = await prisma.expenses.update({
+			where: {
+				id: id,
+			},
+			data: {
+				amount: amount,
+				name: name,
+			},
+		});
+		return updatedExpense;
+	},
 };

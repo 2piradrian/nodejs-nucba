@@ -16,10 +16,11 @@ model Users {
 }
 
 model Expenses {
-  id        Int   @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
   amount    Float
   date      DateTime
+  deleted   Boolean  @default(false)
   user      Users    @relation(fields: [userId], references: [id])
   userId    Int
 }
