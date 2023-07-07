@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export type Expense = {
 	id: number;
 	amount: number;
@@ -10,3 +12,7 @@ export type User = {
 	name: string;
 	email: string;
 };
+
+export interface RequestToken extends Request {
+	userIdFromToken?: number;
+}
