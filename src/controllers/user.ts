@@ -4,6 +4,9 @@ import { UserService } from "../services/user";
 export const UserController = {
 	async getUserById(req: Request, res: Response) {
 		const user = await UserService.getUserById(Number(req.params.id));
+		if (!user) {
+			return res.status(404).json({ error: "User not found" });
+		}
 		res.json(user);
 	},
 
@@ -12,8 +15,8 @@ export const UserController = {
 			const { email, password } = req.body;
 			const token = await UserService.login(email, password);
 			res.json({ token });
-		} catch (error) {
-			res.status(500).json({ error: error });
+		} catch (error: any) {
+			res.status(500).json({ error: error.message });
 		}
 	},
 
@@ -22,8 +25,8 @@ export const UserController = {
 			const { email, password, name } = req.body;
 			const user = await UserService.register(name, email, password);
 			res.json(user);
-		} catch (error) {
-			res.status(500).json({ error: error });
+		} catch (error: any) {
+			res.status(500).json({ error: error.message });
 		}
 	},
 };

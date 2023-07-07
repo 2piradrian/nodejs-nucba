@@ -19,6 +19,15 @@ export const UserService = {
 		return user;
 	},
 
+	async getUserByEmail(email: string) {
+		const user = await prisma.users.findUnique({
+			where: {
+				email: email,
+			},
+		});
+		return user;
+	},
+
 	async login(email: string, password: string): Promise<string> {
 		const user = await prisma.users.findUnique({ where: { email } });
 
