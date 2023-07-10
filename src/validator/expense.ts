@@ -12,16 +12,24 @@ export const ExpenseValidator = {
 			return res.status(400).json({ message: "Amount must be a number" });
 		}
 
-		// is the user a expense owner?
+		if (req.userIdFromToken !== userId) {
+			return res.status(401).json({ message: "Unauthorized" });
+		}
 
 		next();
 	},
 	getByExpenseId(req: RequestToken, res: Response, next: NextFunction) {
 		const { id } = req.params;
+		const { userId } = req.body;
 
 		if (!id) {
 			return res.status(400).json({ message: "Id is required" });
 		}
+
+		if (req.userIdFromToken !== userId) {
+			return res.status(401).json({ message: "Unauthorized" });
+		}
+
 		next();
 	},
 	getByUserId(req: RequestToken, res: Response, next: NextFunction) {
@@ -33,10 +41,14 @@ export const ExpenseValidator = {
 		next();
 	},
 	update(req: RequestToken, res: Response, next: NextFunction) {
-		const { amount, name } = req.body;
+		const { amount, name, userId } = req.body;
 		if (!amount || !name) {
 			return res.status(400).json({ message: "All fields are required" });
 		}
+		if (req.userIdFromToken !== userId) {
+			return res.status(401).json({ message: "Unauthorized" });
+		}
+
 		next();
 	},
 };
